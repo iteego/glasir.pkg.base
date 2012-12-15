@@ -9,8 +9,10 @@
   
   [install: {}, update: {}, uninstall: {}]
   
-  where the values are closures representing the actions we should take for that specific
-  operation. An optional fourth key can be specified: 
+  where the values are groovy closures representing the actions we should take 
+  for that specific operation. 
+
+  An optional fourth 'license' key can be specified: 
 
   [install: {}, update: {}, uninstall: {}, license: {}]
 
@@ -74,7 +76,7 @@
   License Agreement
   -----------------
   
-  Installation and use of ATG @@atgVersion@@ requires acceptance of the following License
+  Installation and use of @@atgProduct@@ @@atgVersion@@ requires acceptance of the following License
   Agreement:
   
   <hit return to continue>

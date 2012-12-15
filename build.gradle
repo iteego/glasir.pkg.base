@@ -47,8 +47,14 @@ processResources {
 
 //reconfigures the 'jar' task to build a glasir.pkg package
 jar {
-  from ("ATG$atgVersion") {
-    into "ATG$atgVersion"
+  //This is where pull the ATG product files into the generated
+  //jar file. If the product-version pattern doesn't work for you,
+  //you can change the from(x) argument below to whatever directory 
+  //you unzipped your product into. 
+  from ("${atgProduct}$atgVersion") {
+    into "${atgProduct}$atgVersion"
+    //if you want to exclude certain files from the package, use exclude patterns:
+    //exclude "**/*.sql"
   } 
 
   manifest { 
