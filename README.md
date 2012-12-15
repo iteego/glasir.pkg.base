@@ -40,6 +40,7 @@ To create a glasir.pkg package for a new ATG artifact using this project (and gi
   * edit gradle.properties file to correspond to your ATG product and version
   * Execute (from the root of the git repository): 
     <pre><code> 
+    git init .
     git add .gitignore
     git add .gradle/.gitignore
     git add .
