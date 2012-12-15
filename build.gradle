@@ -1,0 +1,78 @@
+import org.eclipse.jgit.lib.Repository
+import org.eclipse.jgit.storage.file.FileRepository
+import org.eclipse.jgit.lib.ObjectId
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+defaultTasks 'clean', 'jar'
+
+//by convention, we use this group for glasir.pkg packages, 
+//if your project requires a different enterprise setup and groups
+//feel free to change here. 
+group="com.iteego.glasir.pkg"
+
+//the project version below is used by glasir/gradle to
+//make it possible to deploy new versions of this package in a 
+//controlled manner
+version="1.0.0"
+
+buildscript {    
+  repositories {
+    maven {
+      credentials.username artifactoryReader
+      credentials.password artifactoryReaderPwd
+      url "$artifactoryReaderUrl/glasir"    
+    }
+  }
+  
+  dependencies {
+    //needed for recording git revisions for built package
+    classpath('org.eclipse.jgit:org.eclipse.jgit:2.1.0.201209190230-r')
+  }
+}
+
+processResources {
+  //force the revision to be updated every build...just to make sure
+  //we don't declare stale revisions in our pkg.properties file
+  outputs.upToDateWhen { false }
+  from('package') {
+    filter { String line ->
+      line.replace "@@scmRevisionToken@@", gitHeadRevision[0..6]
+      line.replace "@@atgVersion@@", atgVersion
+    }
+    into("/META-INF")
+  }
+} 
+
+//reconfigures the 'jar' task to build a glasir.pkg package
+jar {
+  from ("ATG$atgVersion") {
+    into "ATG$atgVersion"
+  } 
+
+  manifest { 
+    attributes "Implementation-Title":    project.name, 
+               "Implementation-Version":  project.version,
+               "Implementation-Revision": gitHeadRevision,
+               "Implementation-Date":     new Date()
+  }
+}
+
+String getGitHeadRevision() {  
+  File dotGitDir = file("$rootDir/.git")
+  Repository repository = new FileRepository(dotGitDir)
+  ObjectId head = repository.resolve("HEAD")
+
+  if (!head) 
+    throw new GradleException("Failed to retrieve git revision from $dotGitDir, git repo not initialized or using a different scm?")
+
+  head.name()
+}
+
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.3'
+  jarFile = '.gradle/gradle-wrapper/wrapper.jar'
+}
+
