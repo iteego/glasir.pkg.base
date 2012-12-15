@@ -1,7 +1,7 @@
 Description
 ===========
 This project is a base 'bootstrap' project for creating new 
-glasir package management packages. 
+glasir.pkg package management packages. 
 
 glasir is a family of tools to improve productivity in Oracle ATG 
 e-commerce products. 
@@ -39,10 +39,12 @@ To create a glasir.pkg package for a new ATG artifact using this project (and gi
     is handled by the glasir.pkg system, the patch directory is unnecessary. 
   * edit gradle.properties file to correspond to your ATG product and version
   * Execute (from the root of the git repository): 
+    <pre><code> 
     git add .gitignore
     git add .gradle/.gitignore
     git add .
     git commit -a -m "your commit message"
+    </code></pre>
   * execute 'gradlew clean jar' to build a glasir.pkg package at 
     build/libs. 
   * to deploy the package to a maven/artifactory/nexus server, please 
