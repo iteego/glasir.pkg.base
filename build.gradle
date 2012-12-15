@@ -39,6 +39,7 @@ processResources {
   from('package') {
     filter { String line ->
       line.replace "@@scmRevisionToken@@", gitHeadRevision[0..6]
+      line.replace "@@atgProduct@@", atgProduct
       line.replace "@@atgVersion@@", atgVersion
     }
     into("/META-INF")
