@@ -1,11 +1,13 @@
 import org.eclipse.jgit.lib.Repository
 import org.eclipse.jgit.storage.file.FileRepository
 import org.eclipse.jgit.lib.ObjectId
+import org.apache.tools.ant.filters.ReplaceTokens
 
 apply plugin: 'java'
 apply plugin: 'maven'
 
 defaultTasks 'clean', 'jar'
+
 
 //by convention, we use this group for glasir.pkg packages, 
 //if your project requires a different enterprise setup and groups
@@ -37,11 +39,12 @@ processResources {
   //we don't declare stale revisions in our pkg.properties file
   outputs.upToDateWhen { false }
   from('package') {
-    filter { String line ->
-      line.replace "@@scmRevisionToken@@", gitHeadRevision[0..6]
-      line.replace "@@atgProduct@@", atgProduct
-      line.replace "@@atgVersion@@", atgVersion
-    }
+    filter ReplaceTokens, tokens: [
+        scmRevisionToken: gitHeadRevision[0..6], 
+        atgProduct: atgProduct, 
+        atgVersion: atgVersion
+    ]
+
     into("/META-INF")
   }
 } 

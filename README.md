@@ -25,6 +25,7 @@ To create a glasir.pkg package for a new ATG artifact using this project (and gi
 
   * clone this repository
   * delete the .git directory from the cloned repository
+  * you probably want to remove or modify the README.md file (this text)
   * rename the cloned directory 'glasir.pkg.base' to correspond to 
     the artifact you want to create a glasir.pkg for. Example: for 
     ATG10.0.3 rename the directory to 'glasir.pkg.atg-10.0.3'
