@@ -76,7 +76,7 @@
   License Agreement
   -----------------
   
-  Installation and use of @atgProduct@ @atgVersion@ requires acceptance of the following License
+  Installation and use of @pkgProduct@ @pkgVersion@ requires acceptance of the following License
   Agreement:
   
   <hit return to continue>

@@ -41,8 +41,8 @@ processResources {
   from('package') {
     filter ReplaceTokens, tokens: [
         scmRevisionToken: gitHeadRevision[0..6], 
-        atgProduct: atgProduct, 
-        atgVersion: atgVersion
+        pkgProduct: pkgProduct, 
+        pkgVersion: pkgVersion
     ]
 
     into("/META-INF")
@@ -55,8 +55,8 @@ jar {
   //jar file. If the product-version pattern doesn't work for you,
   //you can change the from(x) argument below to whatever directory 
   //you unzipped your product into. 
-  from ("${atgProduct}$atgVersion") {
-    into "${atgProduct}$atgVersion"
+  from ("${pkgProduct}$pkgVersion") {
+    into "${pkgProduct}$pkgVersion"
     //if you want to exclude certain files from the package, use exclude patterns:
     //exclude "**/*.sql"
   } 
