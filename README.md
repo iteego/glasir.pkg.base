@@ -19,7 +19,7 @@ files used to create the glasir.pkg package and that you use git to do so.
 Both of these choices are optional, you can use another source control system
 and/or choose not to version control you package creation. 
 
-To Craete a New glasir.pkg Package
+To Create a New glasir.pkg Package
 ==================================
 To create a glasir.pkg package for a new ATG artifact using this project (and git): 
 
